@@ -22,7 +22,6 @@ export class FilterPipe implements PipeTransform {
           result.push(item)
         }
       });
-      console.log(result)
       return result;
     }
   }

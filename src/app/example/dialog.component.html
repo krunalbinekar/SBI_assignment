@@ -16,7 +16,7 @@
             </div>
             <div>
                 <mat-form-field class="form-element m-10">
-                    <mat-label>Choose a date</mat-label>
+                    <mat-label>Due date</mat-label>
                     <input matInput type="text" formControlName="duedate" [matDatepicker]="picker">
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -43,7 +43,7 @@
             </mat-form-field> -->
             <div class="submitbutton">
                 <button mat-raised-button color="primary" type="submit" class="button"
-                    [disabled]="!formGroup.valid">Submit Form</button>
+                    [disabled]="!formGroup.valid">Submit</button>
             </div>
         </form>
     </div>

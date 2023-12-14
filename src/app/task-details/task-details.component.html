@@ -9,7 +9,11 @@
       <div class="flex">
         <h3>Description</h3>
         <h4>
-            {{taskDetails?.taskdescription}}
+          <mat-form-field class="form-element" apperance="outline">
+            <mat-label>Task Description</mat-label>
+            <textarea style="overflow: auto;" matInput type="text" placeholder="Enter task description" disabled>{{taskDetails?.taskdescription}}</textarea>
+        </mat-form-field>
+            
         </h4>
       </div>
       <div class="flex">

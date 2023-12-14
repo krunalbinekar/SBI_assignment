@@ -1,8 +1,8 @@
 <div class="task-main">
-    <div class="card-group">
+    <div class="card-group" *ngIf="dataSource.length > 0">
         <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-title>Shiba Inu</mat-card-title>
+              <mat-card-title>Priority Stats</mat-card-title>
             </mat-card-header>
             <mat-card-content>
               <div style="display: block; width: 400px">
@@ -17,29 +17,14 @@
           </mat-card>
           <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-title>Shiba Inu</mat-card-title>
+              <mat-card-title>Task Completed Stats</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <p>This card has divider and indeterminate progress as footer</p>
-              <p></p>
-            </mat-card-content>
-          </mat-card>
-          <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title>Shiba Inu</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <p>This card has divider and indeterminate progress as footer</p>
-              <p></p>
-            </mat-card-content>
-          </mat-card>
-          <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title>Shiba Inu</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <p>This card has divider and indeterminate progress as footer</p>
-              <p></p>
+              <canvas baseChart [chartType]="pieChartType" [labels]="chartTypeLabelss" 
+              [options]="doughnutChartOptionss"
+              [colors]="pieColorss"
+              [data]="chartTypeDatas"
+              ></canvas>
             </mat-card-content>
           </mat-card>
     </div>
@@ -67,7 +52,7 @@
             <mat-option value="incomplete">In Complete</mat-option>
         </mat-select>
     </mat-form-field>
-        <button mat-raised-button color="primary" (click)="openDialog('add',{})">Add Task</button>
+        <button mat-raised-button color="primary" (click)="openDialog('add',{})">Create Task</button>
     </div>
 
     <div class="crud">
@@ -97,7 +82,7 @@
         <!-- Weight Column -->
         <ng-container matColumnDef="taskdescription" >
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-          <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color' : (element.status == 'complete') ? '#14A44D' : 'white'}"> {{element.taskdescription}} </td>
+          <td mat-cell *matCellDef="let element"style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;" [ngStyle]="{'background-color' : (element.status == 'complete') ? '#14A44D' : 'white'}"> {{element.taskdescription}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
@@ -138,6 +123,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></tr>
       </table>
+      <div *ngIf="dataSource.length === 0" class="center">No Tasks to do</div>
     </div>
     </div>
 </div>

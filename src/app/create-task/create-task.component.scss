@@ -92,6 +92,13 @@ table,
   padding: 1px;
 }
 
+.truncate {
+  width: 200px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
 th.mat-sort-header-sorted {
   color: black;
 }
@@ -110,4 +117,11 @@ box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   width: 60%;
   height: 70px;
   border:none ;
+}
+
+.center{
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 10px;
 }

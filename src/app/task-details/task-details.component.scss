@@ -19,6 +19,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    word-wrap: break-word;
+    white-space: normal;
  }
 
  .content {

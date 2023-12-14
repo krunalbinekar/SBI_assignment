@@ -11,12 +11,15 @@ import { CrudService } from '../services/crud.service';
 })
 export class AlertComponent {
   dataSource :any = [];
-
+  myDate
 constructor( @Optional() @Inject(MAT_DIALOG_DATA) public data : any,
 public dialogRef: MatDialogRef<DialogComponent>,
 private formBuilder: FormBuilder,
 private cookieService: CookieService,
 private service : CrudService){
+  this.myDate = new Date();
+  this.myDate.setFullYear( this.myDate.getFullYear() + 1 );
+
   if (this.cookieService.check('taskList')) {
     this.dataSource = JSON.parse(this.cookieService.get('taskList'))
   }
@@ -30,12 +33,11 @@ public confirm() {
   const index = this.dataSource.findIndex((object: { id: string; }) => {
     return object.id === this.data.id;
   });
-  console.log(index)
   if (index > -1) {
     this.dataSource.splice(index, 1);
   }
   this.cookieService.delete('taskList')
-  this.cookieService.set('taskList', JSON.stringify(this.dataSource))
+  this.cookieService.set('taskList', JSON.stringify(this.dataSource),{expires : this.myDate})
   this.dataSource = JSON.parse(this.cookieService.get('taskList'))
   this.service.onPushData(null)
   this.dialogRef.close(true);

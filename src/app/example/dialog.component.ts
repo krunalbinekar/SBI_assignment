@@ -19,6 +19,7 @@ export class DialogComponent {
     {value: 'high', viewValue: 'High'},
   ];
   dataSource :any = [];
+  myDate;
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data : any,
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -34,10 +35,11 @@ export class DialogComponent {
   }
 
   ngOnInit() {
+    this.myDate = new Date();
+    this.myDate.setFullYear( this.myDate.getFullYear() + 1 );
     if (this.cookieService.check('taskList')) {
       this.dataSource = JSON.parse(this.cookieService.get('taskList'))
     }
-    console.log(this.data)
     // console.log(this.dataSource.findIndex(this.dataSource.id))
   }
 
@@ -64,10 +66,8 @@ export class DialogComponent {
       })
     this.service.onPushData(this.formGroup.value)
     this.dataSource.push(this.formGroup.value)
-    this.cookieService.set('taskList', JSON.stringify(this.dataSource))
+    this.cookieService.set('taskList', JSON.stringify(this.dataSource),{expires : this.myDate})
     this.dataSource = JSON.parse(this.cookieService.get('taskList'))
-    console.log(this.formGroup.value)
-    console.log(this.dataSource)
     this.dialogRef.close();
     }else if(this.data.actions == 'edit'){
       const index = this.dataSource.findIndex((object: { id: string; }) => {
@@ -76,16 +76,13 @@ export class DialogComponent {
         })
         return object.id === this.data.id;
       });
-      console.log(index)
       if (index > -1) {
         this.dataSource.splice(index, 1);
       }
-      console.log(this.dataSource)
       //this.dataSource.push(this.formGroup.value)
       this.dataSource.splice(index,0,this.formGroup.value)
-      console.log(this.dataSource)
       this.cookieService.delete('taskList')
-      this.cookieService.set('taskList', JSON.stringify(this.dataSource))
+      this.cookieService.set('taskList', JSON.stringify(this.dataSource),{expires : this.myDate})
       this.dataSource = JSON.parse(this.cookieService.get('taskList'))
       this.service.onPushData(null)
       this.dialogRef.close();

@@ -14,7 +14,6 @@ taskDetails:any
     private location : Location,private router:Router){
     try {
       this.service.specifictaskdetails.subscribe(res => {
-        console.log(res)
         if(res == null){
           this.location.back()
         }else{

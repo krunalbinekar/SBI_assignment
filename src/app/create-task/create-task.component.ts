@@ -9,8 +9,8 @@ import { DialogComponent } from '../example/dialog.component';
 import { CrudService } from '../services/crud.service';
 import { AlertComponent } from '../alert/alert.component';
 import { Router } from '@angular/router';
-import { ChartOptions } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { ChartOptions,ChartType } from 'chart.js';
+import { Label, SingleDataSet } from 'ng2-charts';
 // export interface PeriodicElement {
 //   name: string;
 //   position: number;
@@ -53,41 +53,68 @@ export class CreateTaskComponent {
   searchText:any
   searchTexts:any
   searchTextss:any
+  myDate:any
   public chartType = 'bar';
   public chartLabels:Array<string> = [];
   public chartData:Array<number> = [];
   public doughnutChartOptions:ChartOptions = {
     responsive : true,
+    scales : {
+      xAxes :[{}], yAxes:[{
+        ticks:{
+          beginAtZero : true
+        }
+      }]
+    },legend:{
+      position:'bottom'
+    }
   };
   pieColors = [
     {
       backgroundColor:[
-        '#f77eb9','#fdb16d','#c693f9'
+        '#f77eb9','#fdb16d','#3f51b5'
       ]
     }
   ]
   public chartTypeLabels: Label[] = ['Priority']
   public chartTypeData:any[]
+
+  public chartTypes = 'pie';
+  public chartLabelss:Array<string> = [];
+  public chartDatas:Array<number> = [];
+  public doughnutChartOptionss:ChartOptions = {
+    responsive : true,
+   legend:{
+      display:true
+    }
+  };
+  pieColorss = [
+    {
+      backgroundColor:[
+        '#f77eb9','#fdb16d','#3f51b5'
+      ]
+    }
+  ]
+  public chartTypeLabelss: Label[] = [['Completed','Status'],['InComplete','Status']]
+  public chartTypeDatas:SingleDataSet
+  public pieChartType: ChartType = 'pie';
   ngOnInit() {
+    this.myDate = new Date();
+    this.myDate.setFullYear( this.myDate.getFullYear() + 1 );
     // this.cookieService.set('taskList',JSON.stringify(this.dataSource))
     // console.log(JSON.parse(this.cookieService.get('taskList')));
 
     try {
       this.service.taskdetails.subscribe(res => {
-        console.log(res)
         if(res == null){
           if (this.cookieService.check('taskList')) {
             this.dataSource = JSON.parse(this.cookieService.get('taskList'))
             this.chartDetails()
-            console.log(res)
           }
         }else{
           this.dataSource.push(res);
-          this.cookieService.set('taskList', JSON.stringify(this.dataSource))
+          this.cookieService.set('taskList', JSON.stringify(this.dataSource),{expires : this.myDate})
           this.dataSource = JSON.parse(this.cookieService.get('taskList'))
-          console.log(res)
-          console.log(this.dataSource)
-          console.log(JSON.parse(this.cookieService.get('taskList')));
           this.chartDetails()
         }
         this.table?.renderRows()
@@ -105,8 +132,7 @@ export class CreateTaskComponent {
     const prevIndex = this.dataSource.findIndex((d : any) => d === event.item.data);
     moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
     this.table.renderRows();
-    this.cookieService.set('taskList', JSON.stringify(this.dataSource))
-    console.log(JSON.parse(this.cookieService.get('taskList')));
+    this.cookieService.set('taskList', JSON.stringify(this.dataSource),{expires : this.myDate})
     this.chartDetails()
   }
 
@@ -116,7 +142,6 @@ export class CreateTaskComponent {
   // }
 
   openDialog(action:any,obj: any) {
-    console.log(this.status)
     obj.actions = action
     this.simpleDialog = this.dialog.open(DialogComponent,{
       data:obj
@@ -127,6 +152,10 @@ export class CreateTaskComponent {
     let c = []
     let d = []
     let a = []
+    
+    let comp = [];
+    let incomp = [];
+    
     for(let i=0;i<this.dataSource.length;i++){
       if(this.dataSource[i].priority == 'low'){
       d.push(this.dataSource[i])
@@ -135,18 +164,22 @@ export class CreateTaskComponent {
       }else{
         a.push(this.dataSource[i].priority == 'high')
       }
+
+      if(this.dataSource[i].status == 'complete'){
+        comp.push(this.dataSource[i])
+        }else if(this.dataSource[i].status == 'incomplete'){
+        incomp.push(this.dataSource[i])
+        }
     }
 
     this.chartTypeData = [
-      {data:[Number(d.length)],label:'low'},
-      {data:[Number(c.length)],label:'medium'},
-      {data:[Number(a.length)],label:'high'}
+      {data:[Number(d.length)],label:'Low'},
+      {data:[Number(c.length)],label:'Medium'},
+      {data:[Number(a.length)],label:'High'}
 
     ]
-    console.log(this.chartTypeData)
-console.log(c);
-console.log(d);
 
+    this.chartTypeDatas = [comp.length,incomp.length]
 
   }
 
@@ -163,10 +196,8 @@ console.log(d);
       return object.id === element.id;
     });
     this.dataSource[index].status = status
-    this.cookieService.set('taskList', JSON.stringify(this.dataSource))
+    this.cookieService.set('taskList', JSON.stringify(this.dataSource),{expires : this.myDate})
     this.dataSource = JSON.parse(this.cookieService.get('taskList'))
-    console.log(this.dataSource)
-    console.log(this.status)
     this.chartDetails()
   }
 
