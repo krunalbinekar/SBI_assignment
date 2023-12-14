@@ -1,0 +1,19 @@
+.header,
+.dialog-message {
+  text-transform: lowercase;
+}
+
+.header::first-letter,
+.dialog-message::first-letter {
+  text-transform: uppercase;
+}
+
+.p-10{
+    padding: 10px;
+    }
+    
+    .m-10{
+        margin-right: 10px;
+    }
+    
+    

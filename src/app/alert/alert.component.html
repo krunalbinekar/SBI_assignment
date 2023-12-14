@@ -1,0 +1,13 @@
+<section class="p-10" style="overflow: hidden;">
+<div class="header">
+    <h2 mat-dialog-title>Delete {{ data.taskname  }} Task</h2>
+  </div>
+  <div mat-dialog-content>
+    <p class="mat-body dialog-message">{{ data.taskdescription }}</p>
+  </div>
+  <div mat-dialog-actions style="float: right;">
+    <button class="dialog-btn m-10" mat-raised-button type="button" (click)="cancel()">Cancel</button>
+    <button class="dialog-btn" mat-raised-button color="primary" type="button"
+      (click)="confirm()">Confirm</button>
+  </div>
+</section>

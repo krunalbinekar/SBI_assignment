@@ -1,0 +1,39 @@
+
+<section class="task-details">
+<mat-card class="example-card">
+    <mat-card-header class="center">
+      <mat-card-title>{{taskDetails?.taskname}}</mat-card-title>
+    </mat-card-header>
+    <hr>
+    <mat-card-content>
+      <div class="flex">
+        <h3>Description</h3>
+        <h4>
+            {{taskDetails?.taskdescription}}
+        </h4>
+      </div>
+      <div class="flex">
+        <h3>Due Date</h3>
+        <h4>
+            {{taskDetails?.duedate | date}}
+        </h4>
+      </div>
+      <div  class="flex">
+        <h3>Status</h3>
+        <h4>
+            {{taskDetails?.status}}
+        </h4>
+      </div>
+      <div  class="flex">
+        <h3>Priority</h3>
+        <h4>
+            {{taskDetails?.priority}}
+        </h4>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="center">
+      <button mat-raised-button color="primary" (click)="goBack()">Go Back</button>
+    </mat-card-actions>
+  </mat-card>
+</section>
+  

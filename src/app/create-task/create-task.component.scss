@@ -1,0 +1,113 @@
+.example-card {
+     //max-width: 400px;
+    margin-right: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: 100%;
+  }
+
+.card-group{
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-bottom: 20px;
+   // padding: 10px !important;
+}
+
+
+.task-main{
+    padding: 30px;
+}
+
+.m-top{
+  margin-top: 10px;
+}
+
+table {
+  width: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  overflow: hidden;
+}
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.row-color{
+  background-color: green;
+}
+
+.row-color-red{
+  background-color: red;
+}
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  align-items: center;
+  padding: 10px;
+}
+
+.crud {
+    padding: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 10px;
+}
+
+.tablecss {
+    //background-color:rgb(211, 211, 211);
+    color: black;
+    width: 100%;
+}
+
+th,td {
+    color: black;
+}
+
+table,
+.form-fields {
+  width: 100%;
+  padding: 1px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+tr{
+box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.responsive-table {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.example-full-width{
+  width: 60%;
+  height: 70px;
+  border:none ;
+}
